@@ -11,7 +11,7 @@ import SwiftUI
 struct Melli_v2App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }

@@ -1,23 +1,21 @@
 import SwiftUI
 import AuthenticationServices
 
-struct ContentView: View {
+struct LoginView: View {
     @State private var signedInUserID: String?
-
+    
     var body: some View {
-        NavigationView {
+        ZStack {
             VStack {
+                Text("Melli")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top, 20)
+                
+                Spacer()
+                
                 if let signedInUserID = signedInUserID {
-                    NavigationLink(
-                        destination: SearchView(userId: signedInUserID),
-                        label: {
-                            Text("Search")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(8)
-                        }
-                    )
+                    BottomBarv1(userId: signedInUserID)
                 } else {
                     SignInWithAppleButton(
                         onRequest: { request in
@@ -43,14 +41,14 @@ struct ContentView: View {
                     .frame(width: 200, height: 44)
                 }
             }
-            .navigationTitle("Feed")
-            .navigationBarHidden(false)
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(false)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        LoginView()
     }
 }

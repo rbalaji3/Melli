@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		D90409ED2B5DAD1100EEDAE6 /* APIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90409EC2B5DAD1100EEDAE6 /* APIHelpers.swift */; };
+		D90409EF2B5DC3A600EEDAE6 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90409EE2B5DC3A600EEDAE6 /* BottomBar.swift */; };
 		D91D0FBB2B4B7B54001E549A /* Melli_v2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FBA2B4B7B54001E549A /* Melli_v2App.swift */; };
-		D91D0FBD2B4B7B54001E549A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FBC2B4B7B54001E549A /* ContentView.swift */; };
+		D91D0FBD2B4B7B54001E549A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FBC2B4B7B54001E549A /* LoginView.swift */; };
 		D91D0FBF2B4B7B55001E549A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91D0FBE2B4B7B55001E549A /* Assets.xcassets */; };
 		D91D0FC32B4B7B55001E549A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91D0FC22B4B7B55001E549A /* Preview Assets.xcassets */; };
 		D91D0FCD2B4B7B55001E549A /* Melli_v2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FCC2B4B7B55001E549A /* Melli_v2Tests.swift */; };
 		D91D0FD72B4B7B55001E549A /* Melli_v2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FD62B4B7B55001E549A /* Melli_v2UITests.swift */; };
 		D91D0FD92B4B7B55001E549A /* Melli_v2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FD82B4B7B55001E549A /* Melli_v2UITestsLaunchTests.swift */; };
+		D98AD2032B5DCF3800A0ECC4 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AD2022B5DCF3800A0ECC4 /* FeedView.swift */; };
+		D98AD2052B5DDCDC00A0ECC4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AD2042B5DDCDC00A0ECC4 /* ProfileView.swift */; };
 		D9A40AA52B55EB5800ADF296 /* AddReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A40AA42B55EB5800ADF296 /* AddReviewView.swift */; };
 		D9A40AA72B55F36200ADF296 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A40AA62B55F36200ADF296 /* SearchView.swift */; };
 /* End PBXBuildFile section */
@@ -38,9 +41,10 @@
 
 /* Begin PBXFileReference section */
 		D90409EC2B5DAD1100EEDAE6 /* APIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelpers.swift; sourceTree = "<group>"; };
+		D90409EE2B5DC3A600EEDAE6 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		D91D0FB72B4B7B54001E549A /* Melli_v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Melli_v2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91D0FBA2B4B7B54001E549A /* Melli_v2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Melli_v2App.swift; sourceTree = "<group>"; };
-		D91D0FBC2B4B7B54001E549A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D91D0FBC2B4B7B54001E549A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D91D0FBE2B4B7B55001E549A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D91D0FC02B4B7B55001E549A /* Melli_v2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Melli_v2.entitlements; sourceTree = "<group>"; };
 		D91D0FC22B4B7B55001E549A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 		D91D0FD22B4B7B55001E549A /* Melli_v2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Melli_v2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91D0FD62B4B7B55001E549A /* Melli_v2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Melli_v2UITests.swift; sourceTree = "<group>"; };
 		D91D0FD82B4B7B55001E549A /* Melli_v2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Melli_v2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D98AD2022B5DCF3800A0ECC4 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		D98AD2042B5DDCDC00A0ECC4 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D9A40AA42B55EB5800ADF296 /* AddReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewView.swift; sourceTree = "<group>"; };
 		D9A40AA62B55F36200ADF296 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,13 +108,16 @@
 			isa = PBXGroup;
 			children = (
 				D91D0FBA2B4B7B54001E549A /* Melli_v2App.swift */,
-				D91D0FBC2B4B7B54001E549A /* ContentView.swift */,
+				D91D0FBC2B4B7B54001E549A /* LoginView.swift */,
 				D91D0FBE2B4B7B55001E549A /* Assets.xcassets */,
 				D91D0FC02B4B7B55001E549A /* Melli_v2.entitlements */,
 				D91D0FC12B4B7B55001E549A /* Preview Content */,
 				D9A40AA42B55EB5800ADF296 /* AddReviewView.swift */,
 				D9A40AA62B55F36200ADF296 /* SearchView.swift */,
 				D90409EC2B5DAD1100EEDAE6 /* APIHelpers.swift */,
+				D90409EE2B5DC3A600EEDAE6 /* BottomBar.swift */,
+				D98AD2022B5DCF3800A0ECC4 /* FeedView.swift */,
+				D98AD2042B5DDCDC00A0ECC4 /* ProfileView.swift */,
 			);
 			path = Melli_v2;
 			sourceTree = "<group>";
@@ -268,9 +277,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D98AD2032B5DCF3800A0ECC4 /* FeedView.swift in Sources */,
 				D90409ED2B5DAD1100EEDAE6 /* APIHelpers.swift in Sources */,
+				D98AD2052B5DDCDC00A0ECC4 /* ProfileView.swift in Sources */,
 				D9A40AA72B55F36200ADF296 /* SearchView.swift in Sources */,
-				D91D0FBD2B4B7B54001E549A /* ContentView.swift in Sources */,
+				D90409EF2B5DC3A600EEDAE6 /* BottomBar.swift in Sources */,
+				D91D0FBD2B4B7B54001E549A /* LoginView.swift in Sources */,
 				D91D0FBB2B4B7B54001E549A /* Melli_v2App.swift in Sources */,
 				D9A40AA52B55EB5800ADF296 /* AddReviewView.swift in Sources */,
 			);
