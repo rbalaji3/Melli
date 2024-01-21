@@ -3,18 +3,21 @@ import AuthenticationServices
 
 struct ContentView: View {
     @State private var signedInUserID: String?
-    @State private var isDataEntryViewPresented = false
 
     var body: some View {
         NavigationView {
             VStack {
                 if let signedInUserID = signedInUserID {
                     NavigationLink(
-                        destination: SearchView(user_id: signedInUserID),
-                        isActive: $isDataEntryViewPresented,
-                        label: { EmptyView() }
+                        destination: SearchView(userId: signedInUserID),
+                        label: {
+                            Text("Search")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(8)
+                        }
                     )
-                    .hidden()
                 } else {
                     SignInWithAppleButton(
                         onRequest: { request in
@@ -27,7 +30,6 @@ struct ContentView: View {
                                 if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
                                     let userIdentifier = appleIDCredential.user
                                     signedInUserID = userIdentifier
-//                                    isDataEntryViewPresented = true
                                 } else {
                                     // Handle unexpected credential type
                                     print("Unexpected credential type.")
@@ -41,9 +43,8 @@ struct ContentView: View {
                     .frame(width: 200, height: 44)
                 }
             }
-            .navigationTitle("Melli")
-            .navigationBarHidden(false) // Make sure the navigation bar is not hidden
-
+            .navigationTitle("Feed")
+            .navigationBarHidden(false)
         }
     }
 }

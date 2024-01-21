@@ -9,11 +9,6 @@ import Foundation
 import SwiftUI
 
 // Configuration struct to store API-related configurations
-struct APIConfig {
-    static let baseURL = "http://127.0.0.1:5000"
-    static let showSearchEndpoint = "/search_show"
-    static let movieSearchEndpoint = "/search_movie"
-}
 
 struct Item: Identifiable, Decodable {
     let id: Int
@@ -33,22 +28,27 @@ struct SearchResult: Decodable {
 
 struct ItemCardView: View {
     let item: Item
+    let userId: String
+    let contentType: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            // Placeholder content
-            Text(item.name)
-                .font(.headline)
-                .fontWeight(.bold)
-
-            Text(item.overview)
-                .font(.subheadline)
-                .foregroundColor(.gray)
+        NavigationLink(destination: AddReviewView(item: item, userId: userId, contentType: contentType)) {
+            
+            VStack(alignment: .leading, spacing: 8) {
+                // Placeholder content
+                Text(item.name)
+                    .font(.headline)
+                    .fontWeight(.bold)
+                
+                Text(item.overview)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
         }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
     }
 
 }
@@ -56,12 +56,14 @@ struct ItemCardView: View {
 
 struct SearchResultsView: View {
     let searchResult: SearchResult
+    let userId: String
+    let contentType: String
 
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
                 ForEach(searchResult.results, id: \.id) { item in
-                    ItemCardView(item: item)
+                    ItemCardView(item: item, userId: userId, contentType: contentType)
                 }
             }
             .padding()
@@ -129,11 +131,8 @@ struct SearchView: View {
     @State private var selectedTypeIndex = 0
     @State private var contentTypes = ["Movie", "Show"]
     
-    let user_id: String
-    // Updated initializer
-    init(user_id: String) {
-        self.user_id = user_id
-    }
+    let userId: String
+
     
     struct SearchBar: View {
         @Binding var searchTerm: String
@@ -156,7 +155,6 @@ struct SearchView: View {
     }
 
     var body: some View {
-        NavigationView {
             VStack {
                 HStack {
                     Picker("Select Type", selection: $selectedTypeIndex) {
@@ -185,7 +183,7 @@ struct SearchView: View {
                            Text("No results found")
                                .padding()
                        } else {
-                           SearchResultsView(searchResult: searchResults)
+                           SearchResultsView(searchResult: searchResults, userId: userId, contentType: contentTypes[selectedTypeIndex].lowercased())
                                .padding()
                        }
                    }
@@ -193,14 +191,24 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             
-        }
     }
 
     private func search() {
         // Perform your backend call with the searchTerm
         // Set isSearching to true during the request and update searchResults when the request is complete
         isSearching = true
-        searchContent(contentType: contentTypes[selectedTypeIndex].lowercased(), searchTerm: searchTerm) { (data, error) in
+
+        var endPoint: String
+        if (contentTypes[selectedTypeIndex].lowercased() == "show"){
+            endPoint = APIConfig.showSearchEndpoint
+        }
+        else {
+            endPoint = APIConfig.movieSearchEndpoint
+        }
+        let parameters: [String: Any] = [
+            "search_term": searchTerm
+        ]
+        makeAPICall(method: "POST", endpoint: endPoint, parameters: parameters, completion: { (data, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             } else if let data = data {
@@ -214,12 +222,12 @@ struct SearchView: View {
                 }
             }
         }
-        
+                    )
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(user_id: "000179.d07894c3d292462dafb0919081384370.2132")
+        SearchView(userId: "000179.d07894c3d292462dafb0919081384370.2132")
     }
 }

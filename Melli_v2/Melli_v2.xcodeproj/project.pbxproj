@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D90409ED2B5DAD1100EEDAE6 /* APIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90409EC2B5DAD1100EEDAE6 /* APIHelpers.swift */; };
 		D91D0FBB2B4B7B54001E549A /* Melli_v2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FBA2B4B7B54001E549A /* Melli_v2App.swift */; };
 		D91D0FBD2B4B7B54001E549A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D0FBC2B4B7B54001E549A /* ContentView.swift */; };
 		D91D0FBF2B4B7B55001E549A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91D0FBE2B4B7B55001E549A /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D90409EC2B5DAD1100EEDAE6 /* APIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelpers.swift; sourceTree = "<group>"; };
 		D91D0FB72B4B7B54001E549A /* Melli_v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Melli_v2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91D0FBA2B4B7B54001E549A /* Melli_v2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Melli_v2App.swift; sourceTree = "<group>"; };
 		D91D0FBC2B4B7B54001E549A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				D91D0FC12B4B7B55001E549A /* Preview Content */,
 				D9A40AA42B55EB5800ADF296 /* AddReviewView.swift */,
 				D9A40AA62B55F36200ADF296 /* SearchView.swift */,
+				D90409EC2B5DAD1100EEDAE6 /* APIHelpers.swift */,
 			);
 			path = Melli_v2;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D90409ED2B5DAD1100EEDAE6 /* APIHelpers.swift in Sources */,
 				D9A40AA72B55F36200ADF296 /* SearchView.swift in Sources */,
 				D91D0FBD2B4B7B54001E549A /* ContentView.swift in Sources */,
 				D91D0FBB2B4B7B54001E549A /* Melli_v2App.swift in Sources */,

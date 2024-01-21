@@ -6,81 +6,116 @@
 //
 
 import Foundation
-import SwiftUI
-
 
 import SwiftUI
 
-import Foundation
-struct YourDataModel: Codable {
-    var user_id: String
-    var item_id: String
-    var media_type: String
-    var stars: Int
-//    var timestamp: Int
-    var notes: String
-    
-    // Add other properties as needed
-}
+struct AddReviewView: View {
+    let item: Item
+    let userId: String
+    let contentType: String
+    @State private var rating: Double = 0.0
+    @State private var notes: String = ""
+    @State private var isSubmitting = false
+    @State private var submitSuccess = false
+    @State private var submitFailure = false
+    @State private var showAlert = false
 
+    
 
-struct DataEntryView: View {
-    
-    
-    let user_id: String
-    // Updated initializer
-    init(user_id: String) {
-        self.user_id = user_id
-    }
-//    @State private var user_id = ""
-    @State private var item_id = ""
-    @State private var media_type = ""
-    @State private var stars = 1
-//    @State private var timestamp = ""
-    @State private var notes = ""
 
     var body: some View {
-        VStack {
-            TextField("Item ID", text: $item_id)
-                .padding()
-
-            TextField("Media Type", text: $media_type)
-                .padding()
-
-            Stepper(value: $stars, in: 1...5) {
-                Text("Stars: \(stars)")
+        VStack(alignment: .leading, spacing: 20) {
+            // Display item details
+            Text("Item Name: \(item.name)")
+                .font(.title)
+            // User ID
+            Text("User ID: \(userId)")
+                .foregroundColor(.gray)
+            
+            // User ID
+            Text("Content Type: \(contentType)")
+                .foregroundColor(.gray)
+            
+            // Rating scale
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Rating:")
+                Slider(value: $rating, in: 0...5, step: 1)
+                    .accentColor(.blue)
             }
-            .padding()
-
-            TextEditor(text: $notes)
-                .frame(height: 100)
-                .padding()
-
-            Button("Send Data") {
-                sendDataToBackend()
+            
+            // Notes
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Notes:")
+                TextField("Enter notes...", text: $notes)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
-            .padding()
+            
+            // Submit Button
+            Button(action: {
+                submitReview { success, error in
+                    if let error = error {
+                        // Handle error
+                        submitFailure = true
+
+                    } else if success {
+                        // Handle successful response
+                        submitSuccess = true
+                        print("Submit review successful.")
+                    }
+                    showAlert = true
+
+                }
+            }) {
+                Text("Submit")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(8)
+            }
+            .disabled(isSubmitting) // Disable the button while submitting
+            
+            // Any other details or controls you want to include
+            
+            Spacer()
         }
         .padding()
+        .navigationBarTitle("Add Review", displayMode: .inline)
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(submitSuccess ? "Success" : "Failure"),
+                message: Text(submitSuccess ? "Review submitted successfully" : "Review could not be submitted"),
+                dismissButton: .default(Text("OK")) {
+                    // Navigate back to the search view
+                    // You can use navigationLink or other navigation methods here
+                }
+            )
+        }
     }
 
-    func sendDataToBackend() {
+    
+    private func submitReview(completion: @escaping (Bool, Error?) -> Void) {
+        // Perform your backend API call here
+        // Set isSubmitting to true during the request
+        isSubmitting = true
 
-        let dataModel = YourDataModel(
-            user_id: self.user_id,
-            item_id: item_id,
-            media_type: media_type,
-            stars: stars,
-            notes: notes
-        )
-        print(dataModel)
-        // Rest of the code remains the same...
+        let currentDate = Date()
+        let parameters: [String: Any] = [
+            "media_type": contentType.uppercased(),
+            "user_id": userId,
+            "item_id": String(item.id),
+            "stars": rating,
+            "timestamp": Int(currentDate.timeIntervalSince1970),
+            "notes": notes
+        ]
+
+        makeAPICall(method: "POST", endpoint: APIConfig.postReviewEndpoint, parameters: parameters) { data, error in
+            if let error = error {
+                completion(false, error)
+            } else if let _ = data {
+                // Assuming a successful response if there's no error
+                completion(true, nil)
+            }
+            isSubmitting = false
+        }
     }
 }
-
-struct DataEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        DataEntryView(user_id: "000179.d07894c3d292462dafb0919081384370.2132")
-    }
-}
-

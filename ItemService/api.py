@@ -52,15 +52,15 @@ def post_review(request):
     if request.media_type == MEDIA_TYPE.MOVIE: 
         if module.tmdb_api_handler().validating_movie_by_id(item_id=request.item_id):
             sucess = module.database_handler().insert_movie_rating(review=request)
-            return jsonify({"Sucess": sucess != None})
+            return jsonify({"Success": str(sucess != None)})
         else:
-            return jsonify({"Message": "Could not validate movie", "item_id": request.item_id})
+            return jsonify({"Success": "Could not validate movie", "item_id": request.item_id})
     elif request.media_type == MEDIA_TYPE.SHOW:
         if module.tmdb_api_handler().validating_show_by_id(item_id=request.item_id):
             sucess = module.database_handler().insert_show_rating(review=request)
-            return jsonify({"Sucess": sucess != None})
+            return jsonify({"Success": str(sucess != None)})
         else:
-            return jsonify({"Message": "Could not validate show", "item_id": request.item_id})
+            return jsonify({"Success": "Could not validate show", "item_id": request.item_id})
     
 
 
