@@ -2,7 +2,7 @@
 
 from flask import Flask, request, jsonify
 from module import Module
-from request_definitions import SearchRequest, PostReviewRequest, MEDIA_TYPE, UserReviewsRequest, ItemReviewsRequest, ItemGetRequest
+from request_definitions import SearchRequest, PostReviewRequest, MEDIA_TYPE, UserReviewsRequest, ItemReviewsRequest, ItemGetRequest, FeedRequest
 from pydantic import ValidationError
 
 from functools import wraps
@@ -119,6 +119,10 @@ def get_item(request):
     else:
         return jsonify({"Result": "Could not find item"})
     
+@app.route("/get_feed", methods=['GET'])
+@request_validator(FeedRequest)
+def get_feed(request):
+    return module.feed_handler().generate_user_feed(user_id=request.user_id)
 
 @app.route("/print_db", methods=['GET'])
 def print_db():

@@ -21,6 +21,10 @@ class PostReviewRequest(BaseModel):
 class UserReviewsRequest(BaseModel):
     user_id: str
 
+
+class FeedRequest(BaseModel):
+    user_id: str
+
 class ItemReviewsRequest(BaseModel):
     item_id: str
 

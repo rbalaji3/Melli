@@ -55,17 +55,20 @@ class DatabaseHandler:
         result = self.movie_collection.delete_many(filter_query)
         return result
     
-    def get_all_movie_ratings(self, user_id: str = None, item_id: str = None):
-        """
-        Retrieving items from the movie collection
-        """
+    def _get_all_movie_ratings(self, user_id: str = None, item_id: str = None):
         filter_query = {}
         if user_id: 
             filter_query[USER_ID_KEY] = user_id
         if item_id: 
             filter_query[ITEM_ID_KEY] = item_id
         matching_items = list(self.movie_collection.find(filter_query))
-        return json.dumps(matching_items, default=json_util.default)
+        return matching_items
+    
+    def get_all_movie_ratings(self, user_id: str = None, item_id: str = None):
+        """
+        Retrieving items from the movie collection
+        """
+        return json.dumps(self.get_all_movie_ratings(user_id=user_id, item_id=item_id), default=json_util.default)
         
 
     def insert_show_rating(self, review: PostReviewRequest):
@@ -89,17 +92,20 @@ class DatabaseHandler:
         result = self.show_collection.delete_many(filter_query)
         return result
     
-    def get_all_show_ratings(self, user_id: str = None, item_id: str = None):
-        """
-        Retrieving items from the movie collection
-        """
+    def _get_all_show_ratings(self, user_id: str = None, item_id: str = None):
         filter_query = {}
         if user_id: 
             filter_query[USER_ID_KEY] = user_id
         if item_id: 
             filter_query[ITEM_ID_KEY] = item_id
         matching_items = list(self.show_collection.find(filter_query))
-        return json.dumps(matching_items, default=json_util.default)
+        return matching_items
+
+    def get_all_show_ratings(self, user_id: str = None, item_id: str = None):
+        """
+        Retrieving items from the movie collection
+        """
+        return json.dumps(self._get_all_show_ratings(user_id=user_id, item_id=item_id), default=json_util.default)
 
 
     def print_movie_db(self):
