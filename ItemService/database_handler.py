@@ -8,6 +8,7 @@
 # brew services list
 #  brew services info mongodb-community
 from request_definitions import PostReviewRequest
+from movie_api_handler import TMDBAPIHandler
 from typing import Dict
 from bson import json_util
 import json
@@ -17,10 +18,13 @@ import json
 USER_ID_KEY = "user_id"
 ITEM_ID_KEY = "item_id"
 
+
+
 class DatabaseHandler:
     
-    def __init__(self, database_name: str, mongo_client):
+    def __init__(self, database_name: str, tmdb_api_handler: TMDBAPIHandler, mongo_client):
         self.db = mongo_client[database_name]
+        self.tmdb_api_handler = tmdb_api_handler
         # Initialize the movie collection
         self.movie_collection = self.db['movies']
         self.movie_collection.create_index(USER_ID_KEY, unique=False)
@@ -36,16 +40,20 @@ class DatabaseHandler:
         Inserting item into table
         """
         try:
+            movieMetadata = self.tmdb_api_handler.get_movie(
+                item_id=review.item_id
+            )
             item = {
                 ITEM_ID_KEY: review.item_id,
                 USER_ID_KEY: review.user_id,
                 "stars": review.stars, 
                 "timestamp": review.timestamp,
                 "notes": review.notes,
+                "name": movieMetadata["original_title"]
             }
             result = self.movie_collection.insert_one(item)
             return result
-        except:
+        except Exception as e:
             return None
 
     def delete_movie_rating(self, filter_query: Dict):
@@ -72,13 +80,18 @@ class DatabaseHandler:
         
 
     def insert_show_rating(self, review: PostReviewRequest):
+        
         try:
+            showMetadata = self.tmdb_api_handler.get_show(
+                item_id=review.item_id
+            )
             item = {
                 ITEM_ID_KEY: review.item_id,
                 USER_ID_KEY: review.user_id,
                 "stars": review.stars, 
                 "timestamp": review.timestamp,
                 "notes": review.notes,
+                "name": showMetadata["name"],
             }
             result = self.show_collection.insert_one(item)
             return result

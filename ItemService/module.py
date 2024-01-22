@@ -6,6 +6,7 @@ from movie_api_handler import TMDBAPIHandler
 from database_handler import DatabaseHandler
 from feed_handler import FeedHandler
 
+
 def load_config() -> Optional[Dict]:
     config_path = os.getcwd() + "/config.yaml"
     try:
@@ -47,10 +48,10 @@ class Module:
         if self._database_handler:
             return self._database_handler
         else:
-            return DatabaseHandler(database_name=self.database_name(), mongo_client=self.mongodb_client())
+            return DatabaseHandler(database_name=self.database_name(), tmdb_api_handler=self.tmdb_api_handler(), mongo_client=self.mongodb_client())
     
     def feed_handler(self) -> FeedHandler:
         if self._feed_handler:
             return self._feed_handler
         else:
-            return FeedHandler(database_handler=self.database_handler())
+            return FeedHandler(database_handler=self.database_handler(), tmdb_api_handler=self.tmdb_api_handler())

@@ -2,6 +2,11 @@
 from typing import Optional, Dict, List
 import requests
 
+def print_time():
+    import datetime
+    current_time = datetime.datetime.now()
+    formatted_time = current_time.strftime("%H:%M:%S.%f")[:-3]  # Truncate milliseconds to three decimal places
+
 
 
 class TMDBAPIHandler:

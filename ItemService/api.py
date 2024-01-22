@@ -119,7 +119,7 @@ def get_item(request):
     else:
         return jsonify({"Result": "Could not find item"})
     
-@app.route("/get_feed", methods=['GET'])
+@app.route("/get_feed", methods=['POST'])
 @request_validator(FeedRequest)
 def get_feed(request):
     return module.feed_handler().generate_user_feed(user_id=request.user_id)
